@@ -1,0 +1,25 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+const root = new URL("../", import.meta.url);
+
+test("publishes a transparent remote MCP manifest", async () => {
+  const manifest = JSON.parse(await readFile(new URL("server.json", root), "utf8"));
+  assert.equal(manifest.name, "com.actablesite/readiness");
+  assert.equal(manifest.version, "1.1.1");
+  assert.deepEqual(manifest.remotes, [{ type: "streamable-http", url: "https://actablesite.com/mcp" }]);
+  assert.deepEqual(manifest.repository, {
+    url: "https://github.com/unitedideas/actablesite-mcp",
+    source: "github",
+    id: "1298130629",
+  });
+});
+
+test("documents every read-only tool and the purchase boundary", async () => {
+  const readme = await readFile(new URL("README.md", root), "utf8");
+  for (const tool of ["audit_public_website", "check_ai_crawler_policy", "get_full_report_offer"]) assert.match(readme, new RegExp(tool));
+  assert.match(readme, /cannot open checkout or purchase anything/);
+  assert.match(readme, /private, local, loopback, and reserved network destinations are rejected/);
+  assert.match(readme, /60 per caller per hour/);
+});

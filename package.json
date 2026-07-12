@@ -1,0 +1,14 @@
+{
+  "name": "actablesite-mcp-distribution",
+  "version": "1.1.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "verify:live": "node scripts/verify-live.mjs"
+  },
+  "license": "MIT"
+}
