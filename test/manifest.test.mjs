@@ -18,6 +18,7 @@ test("publishes a transparent remote MCP manifest", async () => {
 
 test("documents every read-only tool and the purchase boundary", async () => {
   const readme = await readFile(new URL("README.md", root), "utf8");
+  assert.match(readme, /^## Tools$/m);
   for (const tool of ["audit_public_website", "check_ai_crawler_policy", "get_full_report_offer"]) assert.match(readme, new RegExp(tool));
   assert.match(readme, /cannot open checkout or purchase anything/);
   assert.match(readme, /private, local, loopback, and reserved network destinations are rejected/);

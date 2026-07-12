@@ -2,6 +2,8 @@
 
 A remote, read-only MCP server for auditing public website readiness and AI crawler policy.
 
+## Tools
+
 It exposes three tools over Streamable HTTP:
 
 - `audit_public_website` checks public identity, offer evidence, action paths, discovery files, metadata, and structured data.
