@@ -28,6 +28,8 @@ test("documents every read-only tool and the purchase boundary", async () => {
   assert.match(readme, /static tool descriptions and JSON input schemas/);
   assert.match(readme, /npm run start:stdio/);
   assert.match(readme, /src\/stdio\.mjs/);
+  assert.match(readme, /Distribution version `1\.2\.0`/);
+  assert.match(readme, /official registry[^\n]+version `1\.1\.1`/);
   assert.match(readme, /no file, shell, browser, account, or write capability/i);
 });
 
