@@ -19,7 +19,7 @@ async function rpc(id, method, params = {}) {
 const initialized = await rpc(1, "initialize", {
   protocolVersion: "2025-06-18",
   capabilities: {},
-  clientInfo: { name: "actablesite-mcp-verifier", version: "1.2.0" },
+  clientInfo: { name: "actablesite-mcp-verifier", version: "1.2.1" },
 });
 assert.equal(initialized.result.protocolVersion, "2025-06-18");
 assert.equal(initialized.result.serverInfo.name, "actablesite");

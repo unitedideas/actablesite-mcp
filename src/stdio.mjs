@@ -4,7 +4,7 @@ import { createInterface } from "node:readline";
 import { pathToFileURL } from "node:url";
 
 const ORIGIN = "https://actablesite.com";
-const VERSION = "1.2.0";
+const VERSION = "1.2.1";
 const MAX_MESSAGE_BYTES = 1_000_000;
 
 export const tools = [
