@@ -23,3 +23,9 @@ test("documents every read-only tool and the purchase boundary", async () => {
   assert.match(readme, /private, local, loopback, and reserved network destinations are rejected/);
   assert.match(readme, /60 per caller per hour/);
 });
+
+test("declares the GitHub maintainer for Glama verification", async () => {
+  const metadata = JSON.parse(await readFile(new URL("glama.json", root), "utf8"));
+  assert.equal(metadata.$schema, "https://glama.ai/mcp/schemas/server.json");
+  assert.deepEqual(metadata.maintainers, ["unitedideas"]);
+});
