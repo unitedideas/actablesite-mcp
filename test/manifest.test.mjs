@@ -30,3 +30,12 @@ test("declares the GitHub maintainer for Glama verification", async () => {
   assert.equal(metadata.$schema, "https://glama.ai/mcp/schemas/server.json");
   assert.deepEqual(metadata.maintainers, ["unitedideas"]);
 });
+
+test("runs the public crawler-policy action with least privilege", async () => {
+  const workflow = await readFile(new URL(".github/workflows/ai-crawler-policy.yml", root), "utf8");
+  assert.match(workflow, /permissions:\n  contents: read/);
+  assert.match(workflow, /uses: unitedideas\/actablesite-check@v1/);
+  assert.match(workflow, /website: actablesite\.com/);
+  assert.match(workflow, /fail-on-blocked: "false"/);
+  assert.doesNotMatch(workflow, /pull_request_target|secrets\.|permissions:\s*write/);
+});
