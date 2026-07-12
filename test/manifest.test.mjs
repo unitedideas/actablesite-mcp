@@ -23,6 +23,9 @@ test("documents every read-only tool and the purchase boundary", async () => {
   assert.match(readme, /cannot open checkout or purchase anything/);
   assert.match(readme, /private, local, loopback, and reserved network destinations are rejected/);
   assert.match(readme, /60 per caller per hour/);
+  assert.match(readme, /https:\/\/actablesite\.com\/\.well-known\/mcp\.json/);
+  assert.match(readme, /https:\/\/actablesite\.com\/\.well-known\/mcp\/server-card\.json/);
+  assert.match(readme, /static tool descriptions and JSON input schemas/);
 });
 
 test("declares the GitHub maintainer for Glama verification", async () => {
