@@ -26,6 +26,9 @@ test("documents every read-only tool and the purchase boundary", async () => {
   assert.match(readme, /https:\/\/actablesite\.com\/\.well-known\/mcp\.json/);
   assert.match(readme, /https:\/\/actablesite\.com\/\.well-known\/mcp\/server-card\.json/);
   assert.match(readme, /static tool descriptions and JSON input schemas/);
+  assert.match(readme, /npm run start:stdio/);
+  assert.match(readme, /src\/stdio\.mjs/);
+  assert.match(readme, /no file, shell, browser, account, or write capability/i);
 });
 
 test("declares the GitHub maintainer for Glama verification", async () => {

@@ -24,6 +24,16 @@ For another MCP client, add a remote server named `actablesite` with:
 - Transport: Streamable HTTP
 - Authentication: none
 
+For clients that require a local stdio command, clone this repository and run the dependency-free bridge:
+
+```bash
+git clone https://github.com/unitedideas/actablesite-mcp.git
+cd actablesite-mcp
+npm run start:stdio
+```
+
+The bridge contains the visible MCP implementation source in [`src/stdio.mjs`](src/stdio.mjs). It exposes the same three read-only tools and sends requests only to ActableSite's bounded public JSON APIs. It has no file, shell, browser, account, or write capability.
+
 The server implements MCP protocol version `2025-06-18` and is published in the official registry as [`com.actablesite/readiness`](https://registry.modelcontextprotocol.io/v0.1/servers?search=com.actablesite/readiness&version=latest).
 
 ## Discovery metadata
@@ -57,7 +67,7 @@ The verifier initializes the live server, checks its protocol and version, and c
 
 ## Repository scope
 
-This repository contains the public registry manifest, connection contract, live verifier, and security policy for the hosted ActableSite MCP server. The production runtime is operated at `https://actablesite.com/mcp`.
+This repository contains a runnable stdio implementation, public registry manifest, connection contract, live verifier, and security policy for the hosted ActableSite MCP server. The production runtime is operated at `https://actablesite.com/mcp`.
 
 ## License
 
