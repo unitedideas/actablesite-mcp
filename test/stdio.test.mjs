@@ -9,7 +9,7 @@ import { handleMessage, tools } from "../src/stdio.mjs";
 
 test("publishes the same three read-only tools", async () => {
   const initialized = await handleMessage({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } });
-  assert.equal(initialized.result.serverInfo.version, "1.1.1");
+  assert.equal(initialized.result.serverInfo.version, "1.2.0");
   assert.equal(initialized.result.protocolVersion, "2025-06-18");
 
   const listed = await handleMessage({ jsonrpc: "2.0", id: 2, method: "tools/list", params: {} });

@@ -32,9 +32,9 @@ cd actablesite-mcp
 npm run start:stdio
 ```
 
-The bridge contains the visible MCP implementation source in [`src/stdio.mjs`](src/stdio.mjs). It exposes the same three read-only tools and sends requests only to ActableSite's bounded public JSON APIs. It has no file, shell, browser, account, or write capability.
+The bridge contains the visible MCP implementation source in [`src/stdio.mjs`](src/stdio.mjs). Distribution version `1.2.0` exposes the same three read-only tools and sends requests only to ActableSite's bounded public JSON APIs. It has no file, shell, browser, account, or write capability.
 
-The server implements MCP protocol version `2025-06-18` and is published in the official registry as [`com.actablesite/readiness`](https://registry.modelcontextprotocol.io/v0.1/servers?search=com.actablesite/readiness&version=latest).
+The hosted server implements MCP protocol version `2025-06-18` and remains published in the official registry as [`com.actablesite/readiness`](https://registry.modelcontextprotocol.io/v0.1/servers?search=com.actablesite/readiness&version=latest) version `1.1.1`. The distribution version tracks repository and local-bridge capabilities independently from that hosted registry record.
 
 ## Discovery metadata
 

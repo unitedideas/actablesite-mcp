@@ -4,7 +4,7 @@ import { createInterface } from "node:readline";
 import { pathToFileURL } from "node:url";
 
 const ORIGIN = "https://actablesite.com";
-const VERSION = "1.1.1";
+const VERSION = "1.2.0";
 const MAX_MESSAGE_BYTES = 1_000_000;
 
 export const tools = [
@@ -54,7 +54,7 @@ async function readJson(fetchImpl, path, options) {
     ...options,
     headers: {
       accept: "application/json",
-      "user-agent": "ActableSite stdio bridge/1.1.1",
+      "user-agent": `ActableSite stdio bridge/${VERSION}`,
       ...(options?.body ? { "content-type": "application/json" } : {}),
       ...options?.headers,
     },
