@@ -1,0 +1,20 @@
+name: Check ActableSite AI crawler policy
+
+on:
+  schedule:
+    - cron: "17 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check public crawler policy
+        uses: unitedideas/actablesite-check@v1
+        with:
+          website: actablesite.com
+          fail-on-blocked: "false"
