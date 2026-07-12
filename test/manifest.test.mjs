@@ -28,9 +28,28 @@ test("documents every read-only tool and the purchase boundary", async () => {
   assert.match(readme, /static tool descriptions and JSON input schemas/);
   assert.match(readme, /npm run start:stdio/);
   assert.match(readme, /src\/stdio\.mjs/);
-  assert.match(readme, /Distribution version `1\.2\.0`/);
+  assert.match(readme, /Distribution version `1\.2\.1`/);
   assert.match(readme, /official registry[^\n]+version `1\.1\.1`/);
+  assert.match(readme, /docker run --rm -i ghcr\.io\/unitedideas\/actablesite-mcp:1\.2\.1/);
   assert.match(readme, /no file, shell, browser, account, or write capability/i);
+});
+
+test("builds and publishes a least-privilege public container", async () => {
+  const dockerfile = await readFile(new URL("Dockerfile", root), "utf8");
+  assert.match(dockerfile, /^FROM node:20-alpine$/m);
+  assert.match(dockerfile, /^USER node$/m);
+  assert.match(dockerfile, /^ENTRYPOINT \["node", "src\/stdio\.mjs"\]$/m);
+  assert.doesNotMatch(dockerfile, /ENV|ARG|EXPOSE|COPY \. /);
+
+  const workflow = await readFile(new URL(".github/workflows/publish-container.yml", root), "utf8");
+  assert.match(workflow, /permissions:\n  contents: read\n  packages: write/);
+  assert.match(workflow, /docker build --pull --tag actablesite-mcp:test/);
+  assert.match(workflow, /docker logout ghcr\.io/);
+  assert.match(workflow, /docker pull "ghcr\.io\/\$\{GITHUB_REPOSITORY\}/);
+  assert.match(workflow, /uses: actions\/checkout@[a-f0-9]{40}/);
+  assert.match(workflow, /uses: docker\/login-action@[a-f0-9]{40}/);
+  assert.match(workflow, /uses: docker\/build-push-action@[a-f0-9]{40}/);
+  assert.doesNotMatch(workflow, /pull_request_target|personal access token|PAT_/i);
 });
 
 test("declares the GitHub maintainer for Glama verification", async () => {
