@@ -26,6 +26,15 @@ For another MCP client, add a remote server named `actablesite` with:
 
 The server implements MCP protocol version `2025-06-18` and is published in the official registry as [`com.actablesite/readiness`](https://registry.modelcontextprotocol.io/v0.1/servers?search=com.actablesite/readiness&version=latest).
 
+## Discovery metadata
+
+Directory scanners can read either machine-readable discovery surface:
+
+- [`/.well-known/mcp.json`](https://actablesite.com/.well-known/mcp.json) identifies the official registry name, repository, remote endpoint, transport, authentication mode, and tool names.
+- [`/.well-known/mcp/server-card.json`](https://actablesite.com/.well-known/mcp/server-card.json) provides static tool descriptions and JSON input schemas for scanners that cannot complete a live MCP handshake.
+
+Both files describe the same unauthenticated endpoint and three-tool inventory verified by this repository.
+
 ## Safety contract
 
 - Public HTTP and HTTPS websites only; private, local, loopback, and reserved network destinations are rejected.
