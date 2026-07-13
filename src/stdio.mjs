@@ -4,7 +4,7 @@ import { createInterface } from "node:readline";
 import { pathToFileURL } from "node:url";
 
 const ORIGIN = "https://actablesite.com";
-const VERSION = "1.2.1";
+const VERSION = "1.3.0";
 const MAX_MESSAGE_BYTES = 1_000_000;
 
 export const tools = [
@@ -39,6 +39,13 @@ export const tools = [
     inputSchema: { type: "object", additionalProperties: false, properties: {} },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   },
+  {
+    name: "get_practice_radar_offer",
+    title: "Get the Practice Radar data offer",
+    description: "Return the current Practice Radar weekly-edition receipt, public sample, exact $39 monthly price, included fields, delivery and cancellation paths, and material NPI limitations. This tool is informational: it cannot open checkout or purchase. Present the offer and require explicit user confirmation before any separate checkout or purchase action.",
+    inputSchema: { type: "object", additionalProperties: false, properties: {} },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
+  },
 ];
 
 function response(id, result) {
@@ -67,6 +74,7 @@ async function readJson(fetchImpl, path, options) {
 
 async function callTool(name, args, fetchImpl) {
   if (name === "get_full_report_offer") return readJson(fetchImpl, "/api/offer");
+  if (name === "get_practice_radar_offer") return readJson(fetchImpl, "/api/practice-radar-offer");
   if (name !== "audit_public_website" && name !== "check_ai_crawler_policy") throw new Error(`Unknown tool: ${name || "missing name"}.`);
   const path = name === "audit_public_website" ? "/api/audit" : "/api/ai-crawler-check";
   return readJson(fetchImpl, path, { method: "POST", body: JSON.stringify({ url: args?.url }) });
@@ -81,7 +89,7 @@ export async function handleMessage(message, fetchImpl = fetch) {
       protocolVersion: "2025-06-18",
       capabilities: { tools: { listChanged: false } },
       serverInfo: { name: "actablesite-stdio", title: "ActableSite", version: VERSION },
-      instructions: "Use these read-only tools only for public websites. Results are observable evidence, not a guarantee of crawling, ranking, traffic, or revenue.",
+      instructions: "Use these read-only tools for public website evidence and public Practice Radar offer metadata. Treat results as evidence, not a guarantee of crawling, ranking, revenue, licensure, active operation, demand, or buying intent. Never open checkout or attempt a purchase without explicit user confirmation.",
     });
   }
   if (message.method === "ping") return response(id, {});

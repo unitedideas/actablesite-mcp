@@ -7,7 +7,7 @@ const root = new URL("../", import.meta.url);
 test("publishes a transparent remote MCP manifest", async () => {
   const manifest = JSON.parse(await readFile(new URL("server.json", root), "utf8"));
   assert.equal(manifest.name, "com.actablesite/readiness");
-  assert.equal(manifest.version, "1.1.1");
+  assert.equal(manifest.version, "1.3.0");
   assert.deepEqual(manifest.remotes, [{ type: "streamable-http", url: "https://actablesite.com/mcp" }]);
   assert.deepEqual(manifest.repository, {
     url: "https://github.com/unitedideas/actablesite-mcp",
@@ -19,7 +19,7 @@ test("publishes a transparent remote MCP manifest", async () => {
 test("documents every read-only tool and the purchase boundary", async () => {
   const readme = await readFile(new URL("README.md", root), "utf8");
   assert.match(readme, /^## Tools$/m);
-  for (const tool of ["audit_public_website", "check_ai_crawler_policy", "get_full_report_offer"]) assert.match(readme, new RegExp(tool));
+  for (const tool of ["audit_public_website", "check_ai_crawler_policy", "get_full_report_offer", "get_practice_radar_offer"]) assert.match(readme, new RegExp(tool));
   assert.match(readme, /cannot open checkout or purchase anything/);
   assert.match(readme, /private, local, loopback, and reserved network destinations are rejected/);
   assert.match(readme, /60 per caller per hour/);
@@ -28,9 +28,9 @@ test("documents every read-only tool and the purchase boundary", async () => {
   assert.match(readme, /static tool descriptions and JSON input schemas/);
   assert.match(readme, /npm run start:stdio/);
   assert.match(readme, /src\/stdio\.mjs/);
-  assert.match(readme, /Distribution version `1\.2\.1`/);
-  assert.match(readme, /official registry[^\n]+version `1\.1\.1`/);
-  assert.match(readme, /docker run --rm -i ghcr\.io\/unitedideas\/actablesite-mcp:1\.2\.1/);
+  assert.match(readme, /Distribution version `1\.3\.0`/);
+  assert.match(readme, /official registry[^\n]+version `1\.3\.0`/);
+  assert.match(readme, /docker run --rm -i ghcr\.io\/unitedideas\/actablesite-mcp:1\.3\.0/);
   assert.match(readme, /no file, shell, browser, account, or write capability/i);
 });
 

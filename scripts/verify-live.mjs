@@ -19,17 +19,18 @@ async function rpc(id, method, params = {}) {
 const initialized = await rpc(1, "initialize", {
   protocolVersion: "2025-06-18",
   capabilities: {},
-  clientInfo: { name: "actablesite-mcp-verifier", version: "1.2.1" },
+  clientInfo: { name: "actablesite-mcp-verifier", version: "1.3.0" },
 });
 assert.equal(initialized.result.protocolVersion, "2025-06-18");
 assert.equal(initialized.result.serverInfo.name, "actablesite");
-assert.equal(initialized.result.serverInfo.version, "1.1.1");
+assert.equal(initialized.result.serverInfo.version, "1.3.0");
 
 const listed = await rpc(2, "tools/list");
 assert.deepEqual(listed.result.tools.map((tool) => tool.name), [
   "audit_public_website",
   "check_ai_crawler_policy",
   "get_full_report_offer",
+  "get_practice_radar_offer",
 ]);
 assert.equal(listed.result.tools.every((tool) => tool.annotations?.readOnlyHint === true), true);
 
