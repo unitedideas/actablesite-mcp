@@ -52,6 +52,12 @@ Directory scanners can read either machine-readable discovery surface:
 
 Both files describe the same unauthenticated endpoint and four-tool inventory verified by this repository.
 
+## Ongoing crawler monitoring
+
+The MCP tools report current public evidence and do not create background jobs. [Crawler Watch](https://actablesite.com/crawler-watch) is the separate $9/month service for one public website: it checks crawler policy, synthetic homepage responses, `sitemap.xml`, and `llms.txt` every 15 minutes and emails after a changed state appears twice.
+
+Its synthetic requests do not authenticate provider IP ranges or prove crawling, indexing, citation, ranking, or traffic.
+
 ## Safety contract
 
 - Public HTTP and HTTPS websites only; private, local, loopback, and reserved network destinations are rejected.
