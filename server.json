@@ -13,7 +13,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://actablesite.com/mcp"
+      "url": "https://actablesite.com/mcp/"
     }
   ]
 }

@@ -8,7 +8,7 @@ test("publishes a transparent remote MCP manifest", async () => {
   const manifest = JSON.parse(await readFile(new URL("server.json", root), "utf8"));
   assert.equal(manifest.name, "com.actablesite/ai-crawler-robots-monitor");
   assert.equal(manifest.version, "1.4.2");
-  assert.deepEqual(manifest.remotes, [{ type: "streamable-http", url: "https://actablesite.com/mcp" }]);
+  assert.deepEqual(manifest.remotes, [{ type: "streamable-http", url: "https://actablesite.com/mcp/" }]);
   assert.deepEqual(manifest.repository, {
     url: "https://github.com/unitedideas/actablesite-mcp",
     source: "github",
