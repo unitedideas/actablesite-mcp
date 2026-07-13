@@ -4,7 +4,7 @@ import { createInterface } from "node:readline";
 import { pathToFileURL } from "node:url";
 
 const ORIGIN = "https://actablesite.com";
-const VERSION = "1.4.0";
+const VERSION = "1.4.1";
 const MAX_MESSAGE_BYTES = 1_000_000;
 
 export const tools = [
@@ -96,7 +96,7 @@ export async function handleMessage(message, fetchImpl = fetch) {
     return response(id, {
       protocolVersion: "2025-06-18",
       capabilities: { tools: { listChanged: false } },
-      serverInfo: { name: "actablesite-stdio", title: "ActableSite", version: VERSION },
+      serverInfo: { name: "actablesite-stdio", title: "ActableSite AI Crawler Monitor", version: VERSION },
       instructions: "Use these read-only tools for public website evidence and explicit Crawler Watch, report, and Practice Radar offer metadata. Treat results as evidence, not a guarantee of crawling, ranking, revenue, licensure, active operation, demand, or buying intent. Never open checkout or attempt a purchase without explicit user confirmation.",
     });
   }

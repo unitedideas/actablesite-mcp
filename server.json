@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.actablesite/readiness",
-  "title": "ActableSite",
-  "description": "Audit public websites and retrieve Crawler Watch, report, and Practice Radar offer metadata.",
-  "version": "1.4.0",
+  "title": "ActableSite AI Crawler Monitor",
+  "description": "Check AI crawler robots.txt policy and monitor public-site policy, sitemap, and llms.txt changes.",
+  "version": "1.4.1",
   "websiteUrl": "https://actablesite.com/mcp-server",
   "repository": {
     "url": "https://github.com/unitedideas/actablesite-mcp",
