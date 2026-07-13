@@ -6,8 +6,8 @@ const root = new URL("../", import.meta.url);
 
 test("publishes a transparent remote MCP manifest", async () => {
   const manifest = JSON.parse(await readFile(new URL("server.json", root), "utf8"));
-  assert.equal(manifest.name, "com.actablesite/readiness");
-  assert.equal(manifest.version, "1.4.1");
+  assert.equal(manifest.name, "com.actablesite/ai-crawler-robots-monitor");
+  assert.equal(manifest.version, "1.4.2");
   assert.deepEqual(manifest.remotes, [{ type: "streamable-http", url: "https://actablesite.com/mcp" }]);
   assert.deepEqual(manifest.repository, {
     url: "https://github.com/unitedideas/actablesite-mcp",
@@ -28,9 +28,9 @@ test("documents every read-only tool and the purchase boundary", async () => {
   assert.match(readme, /static tool descriptions and JSON input schemas/);
   assert.match(readme, /npm run start:stdio/);
   assert.match(readme, /src\/stdio\.mjs/);
-  assert.match(readme, /Distribution version `1\.4\.1`/);
-  assert.match(readme, /official registry[^\n]+version `1\.4\.1`/);
-  assert.match(readme, /docker run --rm -i ghcr\.io\/unitedideas\/actablesite-mcp:1\.4\.1/);
+  assert.match(readme, /Distribution version `1\.4\.2`/);
+  assert.match(readme, /official registry[^\n]+version `1\.4\.2`/);
+  assert.match(readme, /docker run --rm -i ghcr\.io\/unitedideas\/actablesite-mcp:1\.4\.2/);
   assert.match(readme, /no file, shell, browser, account, or write capability/i);
 });
 

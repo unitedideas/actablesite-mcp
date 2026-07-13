@@ -34,15 +34,15 @@ cd actablesite-mcp
 npm run start:stdio
 ```
 
-The bridge contains the visible MCP implementation source in [`src/stdio.mjs`](src/stdio.mjs). Distribution version `1.4.1` exposes the same five read-only tools and sends requests only to ActableSite's bounded public JSON APIs. It has no file, shell, browser, account, or write capability.
+The bridge contains the visible MCP implementation source in [`src/stdio.mjs`](src/stdio.mjs). Distribution version `1.4.2` exposes the same five read-only tools and sends requests only to ActableSite's bounded public JSON APIs. It has no file, shell, browser, account, or write capability.
 
 The same stdio process is available as a public, non-root container:
 
 ```bash
-docker run --rm -i ghcr.io/unitedideas/actablesite-mcp:1.4.1
+docker run --rm -i ghcr.io/unitedideas/actablesite-mcp:1.4.2
 ```
 
-The hosted server implements MCP protocol version `2025-06-18` and is published in the official registry as [`com.actablesite/readiness`](https://registry.modelcontextprotocol.io/v0.1/servers?search=com.actablesite/readiness&version=latest) version `1.4.1`.
+The hosted server implements MCP protocol version `2025-06-18` and is published in the official registry as [`com.actablesite/ai-crawler-robots-monitor`](https://registry.modelcontextprotocol.io/v0.1/servers?search=com.actablesite/ai-crawler-robots-monitor&version=latest) version `1.4.2`.
 
 ## Discovery metadata
 

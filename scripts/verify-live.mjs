@@ -19,11 +19,11 @@ async function rpc(id, method, params = {}) {
 const initialized = await rpc(1, "initialize", {
   protocolVersion: "2025-06-18",
   capabilities: {},
-  clientInfo: { name: "actablesite-mcp-verifier", version: "1.4.1" },
+  clientInfo: { name: "actablesite-mcp-verifier", version: "1.4.2" },
 });
 assert.equal(initialized.result.protocolVersion, "2025-06-18");
 assert.equal(initialized.result.serverInfo.name, "actablesite");
-assert.equal(initialized.result.serverInfo.version, "1.4.1");
+assert.equal(initialized.result.serverInfo.version, "1.4.2");
 
 const listed = await rpc(2, "tools/list");
 assert.deepEqual(listed.result.tools.map((tool) => tool.name), [
