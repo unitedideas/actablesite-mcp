@@ -4,7 +4,7 @@ import { createInterface } from "node:readline";
 import { pathToFileURL } from "node:url";
 
 const ORIGIN = "https://actablesite.com";
-const VERSION = "1.3.0";
+const VERSION = "1.4.0";
 const MAX_MESSAGE_BYTES = 1_000_000;
 
 export const tools = [
@@ -30,6 +30,13 @@ export const tools = [
       properties: { url: { type: "string", description: "Public HTTP or HTTPS website URL." } },
       required: ["url"],
     },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
+  },
+  {
+    name: "get_crawler_watch_offer",
+    title: "Get the Crawler Watch monitoring offer",
+    description: "Return the exact $9 monthly price, one-site scope, 15-minute check cadence, two-check confirmation, delivery and cancellation paths, and synthetic-check limitations. This tool is informational: present the offer and require explicit user confirmation before any separate checkout or purchase action.",
+    inputSchema: { type: "object", additionalProperties: false, properties: {} },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
   },
   {
@@ -73,6 +80,7 @@ async function readJson(fetchImpl, path, options) {
 }
 
 async function callTool(name, args, fetchImpl) {
+  if (name === "get_crawler_watch_offer") return readJson(fetchImpl, "/api/crawler-watch-offer");
   if (name === "get_full_report_offer") return readJson(fetchImpl, "/api/offer");
   if (name === "get_practice_radar_offer") return readJson(fetchImpl, "/api/practice-radar-offer");
   if (name !== "audit_public_website" && name !== "check_ai_crawler_policy") throw new Error(`Unknown tool: ${name || "missing name"}.`);
@@ -89,7 +97,7 @@ export async function handleMessage(message, fetchImpl = fetch) {
       protocolVersion: "2025-06-18",
       capabilities: { tools: { listChanged: false } },
       serverInfo: { name: "actablesite-stdio", title: "ActableSite", version: VERSION },
-      instructions: "Use these read-only tools for public website evidence and public Practice Radar offer metadata. Treat results as evidence, not a guarantee of crawling, ranking, revenue, licensure, active operation, demand, or buying intent. Never open checkout or attempt a purchase without explicit user confirmation.",
+      instructions: "Use these read-only tools for public website evidence and explicit Crawler Watch, report, and Practice Radar offer metadata. Treat results as evidence, not a guarantee of crawling, ranking, revenue, licensure, active operation, demand, or buying intent. Never open checkout or attempt a purchase without explicit user confirmation.",
     });
   }
   if (message.method === "ping") return response(id, {});

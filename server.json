@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.actablesite/readiness",
   "title": "ActableSite",
-  "description": "Audit public websites and retrieve explicit report and Practice Radar offer metadata.",
-  "version": "1.3.0",
+  "description": "Audit public websites and retrieve explicit Crawler Watch, report, and Practice Radar offer metadata.",
+  "version": "1.4.0",
   "websiteUrl": "https://actablesite.com/mcp-server",
   "repository": {
     "url": "https://github.com/unitedideas/actablesite-mcp",

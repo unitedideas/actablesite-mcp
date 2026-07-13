@@ -7,13 +7,13 @@ import { fileURLToPath } from "node:url";
 
 import { handleMessage, tools } from "../src/stdio.mjs";
 
-test("publishes the same four read-only tools", async () => {
+test("publishes the same five read-only tools", async () => {
   const initialized = await handleMessage({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } });
-  assert.equal(initialized.result.serverInfo.version, "1.3.0");
+  assert.equal(initialized.result.serverInfo.version, "1.4.0");
   assert.equal(initialized.result.protocolVersion, "2025-06-18");
 
   const listed = await handleMessage({ jsonrpc: "2.0", id: 2, method: "tools/list", params: {} });
-  assert.deepEqual(listed.result.tools.map((tool) => tool.name), ["audit_public_website", "check_ai_crawler_policy", "get_full_report_offer", "get_practice_radar_offer"]);
+  assert.deepEqual(listed.result.tools.map((tool) => tool.name), ["audit_public_website", "check_ai_crawler_policy", "get_crawler_watch_offer", "get_full_report_offer", "get_practice_radar_offer"]);
   assert.equal(tools.every((tool) => tool.annotations.readOnlyHint === true && tool.annotations.destructiveHint === false), true);
 });
 
@@ -27,8 +27,9 @@ test("routes tool calls only to the bounded public API", async () => {
   for (const [id, name, args] of [
     [1, "audit_public_website", { url: "https://example.com" }],
     [2, "check_ai_crawler_policy", { url: "https://example.com" }],
-    [3, "get_full_report_offer", {}],
-    [4, "get_practice_radar_offer", {}],
+    [3, "get_crawler_watch_offer", {}],
+    [4, "get_full_report_offer", {}],
+    [5, "get_practice_radar_offer", {}],
   ]) {
     const result = await handleMessage({ jsonrpc: "2.0", id, method: "tools/call", params: { name, arguments: args } }, fetchMock);
     assert.equal(result.result.isError, false);
@@ -37,6 +38,7 @@ test("routes tool calls only to the bounded public API", async () => {
   assert.deepEqual(requests.map((request) => request.url), [
     "https://actablesite.com/api/audit",
     "https://actablesite.com/api/ai-crawler-check",
+    "https://actablesite.com/api/crawler-watch-offer",
     "https://actablesite.com/api/offer",
     "https://actablesite.com/api/practice-radar-offer",
   ]);
@@ -63,5 +65,5 @@ test("runs as a newline-delimited stdio MCP process", async (t) => {
   const [line] = await once(lines, "line");
   const response = JSON.parse(line);
   assert.equal(response.id, 9);
-  assert.deepEqual(response.result.tools.map((tool) => tool.name), ["audit_public_website", "check_ai_crawler_policy", "get_full_report_offer", "get_practice_radar_offer"]);
+  assert.deepEqual(response.result.tools.map((tool) => tool.name), ["audit_public_website", "check_ai_crawler_policy", "get_crawler_watch_offer", "get_full_report_offer", "get_practice_radar_offer"]);
 });
