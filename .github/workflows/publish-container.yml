@@ -43,7 +43,7 @@ jobs:
         run: |
           printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"container-check","version":"1"}}}' \
             | docker run --rm -i actablesite-mcp:test \
-            | node -e 'let data=""; process.stdin.on("data", chunk => data += chunk).on("end", () => { const message = JSON.parse(data); if (message.result?.serverInfo?.version !== "1.2.1" || message.result?.capabilities?.tools?.listChanged !== false) process.exit(1); });'
+            | EXPECTED_VERSION="${{ steps.version.outputs.version }}" node -e 'let data=""; process.stdin.on("data", chunk => data += chunk).on("end", () => { const message = JSON.parse(data); if (message.result?.serverInfo?.version !== process.env.EXPECTED_VERSION || message.result?.capabilities?.tools?.listChanged !== false) process.exit(1); });'
 
       - name: Log in to GHCR
         if: github.event_name != 'pull_request'

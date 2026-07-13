@@ -44,6 +44,9 @@ test("builds and publishes a least-privilege public container", async () => {
   const workflow = await readFile(new URL(".github/workflows/publish-container.yml", root), "utf8");
   assert.match(workflow, /permissions:\n  contents: read\n  packages: write/);
   assert.match(workflow, /docker build --pull --tag actablesite-mcp:test/);
+  assert.match(workflow, /EXPECTED_VERSION="\$\{\{ steps\.version\.outputs\.version \}\}"/);
+  assert.match(workflow, /serverInfo\?\.version !== process\.env\.EXPECTED_VERSION/);
+  assert.doesNotMatch(workflow, /serverInfo\?\.version !== "[0-9]+\.[0-9]+\.[0-9]+"/);
   assert.match(workflow, /docker logout ghcr\.io/);
   assert.match(workflow, /docker pull "ghcr\.io\/\$\{GITHUB_REPOSITORY\}/);
   assert.match(workflow, /uses: actions\/checkout@[a-f0-9]{40}/);
