@@ -17,12 +17,12 @@ It exposes five tools over Streamable HTTP:
 Claude Code:
 
 ```bash
-claude mcp add --transport http actablesite https://actablesite.com/mcp
+claude mcp add --transport http actablesite https://actablesite.com/mcp/
 ```
 
 For another MCP client, add a remote server named `actablesite` with:
 
-- URL: `https://actablesite.com/mcp`
+- URL: `https://actablesite.com/mcp/`
 - Transport: Streamable HTTP
 - Authentication: none
 
@@ -82,7 +82,7 @@ The verifier initializes the live server, checks its protocol and version, and c
 
 ## Repository scope
 
-This repository contains a runnable stdio implementation, public registry manifest, connection contract, live verifier, and security policy for the hosted ActableSite MCP server. The production runtime is operated at `https://actablesite.com/mcp`.
+This repository contains a runnable stdio implementation, public registry manifest, connection contract, live verifier, and security policy for the hosted ActableSite MCP server. The production runtime is operated at `https://actablesite.com/mcp/`.
 
 ## License
 

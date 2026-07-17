@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-const endpoint = "https://actablesite.com/mcp";
+const endpoint = "https://actablesite.com/mcp/";
 
 async function rpc(id, method, params = {}) {
   const response = await fetch(endpoint, {
